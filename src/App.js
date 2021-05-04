@@ -46,7 +46,7 @@ function App() {
          {
           searchResults ?
           searchResults.map(item => (
-            <li>{item.Title}</li>
+            <li>{item.Title} {item.Year}</li>
           ))
           :
           <div>No Data</div>
