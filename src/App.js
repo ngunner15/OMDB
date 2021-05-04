@@ -35,6 +35,15 @@ function App() {
     setNomination([...nomination, item]);
   }
 
+  const removeNominations = (index) => {
+    let newArray = [...nomination];
+
+    if (index !== -1) {
+      newArray.splice(index, 1);
+      setNomination(newArray);
+    }
+  }
+
   return (
     <div className="App">
       <h1>The Shoppies</h1>
@@ -64,10 +73,10 @@ function App() {
       <ul>
          {
           nomination ?
-          nomination.map(item => (
+          nomination.map((item, index) => (
             <div>
               <li>{item.Title} {item.Year}</li>
-              {/* <button onClick={() => addToNominations(item)}>Nominate</button> */}
+              <button onClick={() => removeNominations(index)}>Remove</button>
             </div>
           ))
           :
