@@ -6,6 +6,7 @@ function App() {
 
   const [movie, setMovie] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [nomination, setNomination] = useState([]);
 
   useEffect(() => {
     axios.get(`http://www.omdbapi.com/?s=${movie}&apikey=${process.env.REACT_APP_API_KEY}`)
@@ -30,6 +31,10 @@ function App() {
 
   // fetchData();
 
+  const addToNominations = (item) => {
+    setNomination([...nomination, item]);
+  }
+
   return (
     <div className="App">
       <h1>The Shoppies</h1>
@@ -46,7 +51,24 @@ function App() {
          {
           searchResults ?
           searchResults.map(item => (
-            <li>{item.Title} {item.Year}</li>
+            <div>
+              <li>{item.Title} {item.Year}</li>
+              <button disabled={nomination.includes(item)} onClick={() => addToNominations(item)}>Nominate</button>
+            </div>
+          ))
+          :
+          <div>No Data</div>
+        }
+      </ul>
+      <br></br>
+      <ul>
+         {
+          nomination ?
+          nomination.map(item => (
+            <div>
+              <li>{item.Title} {item.Year}</li>
+              {/* <button onClick={() => addToNominations(item)}>Nominate</button> */}
+            </div>
           ))
           :
           <div>No Data</div>
