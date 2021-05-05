@@ -44,6 +44,10 @@ function App() {
     }
   }
 
+  const disableButton = (item) => {
+    return nomination.includes(item) || nomination.length > 4;
+  }
+
   return (
     <div className="App">
       <h1>The Shoppies</h1>
@@ -62,7 +66,7 @@ function App() {
           searchResults.map(item => (
             <div>
               <li>{item.Title} {item.Year}</li>
-              <button disabled={nomination.includes(item)} onClick={() => addToNominations(item)}>Nominate</button>
+              <button disabled={disableButton(item)} onClick={() => addToNominations(item)}>Nominate</button>
             </div>
           ))
           :
@@ -80,7 +84,13 @@ function App() {
             </div>
           ))
           :
-          <div>No Data</div>
+          <div>Zero nominations</div>
+        }
+        {
+          nomination.length > 4 ?
+          <div>Nomination limit is 5, please remove nominations to add more...</div>
+          :
+          null
         }
       </ul>
     </div>
