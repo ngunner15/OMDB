@@ -1,6 +1,7 @@
 import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import ls from 'local-storage';
 
 function App() {
 
@@ -24,6 +25,11 @@ function App() {
       })
   }, [movie]);
 
+  useEffect(() => {
+    let myNominations = ls.get('nominations');
+    setNomination(myNominations);
+  }, []);
+
   // const fetchData = async () => {
   //   let req = await axios.get(`http://www.omdbapi.com/?s=batman&apikey=${process.env.REACT_APP_API_KEY}`);
   //   console.log(req.data.Search);
@@ -31,8 +37,14 @@ function App() {
 
   // fetchData();
 
+  // button logic
+
   const addToNominations = (item) => {
-    setNomination([...nomination, item]);
+    let nominationArray = [...nomination, item];
+
+    setNomination(nominationArray);
+    // adding to localStorage
+    ls.set('nominations', nominationArray);
   }
 
   const removeNominations = (index) => {
@@ -41,11 +53,13 @@ function App() {
     if (index !== -1) {
       newArray.splice(index, 1);
       setNomination(newArray);
+      // remove from localStorage
+      ls.set('nominations', newArray);
     }
   }
 
   const disableButton = (item) => {
-    return nomination.includes(item) || nomination.length > 4;
+    return nomination && (nomination.includes(item) || nomination.length > 4);
   }
 
   return (
@@ -87,7 +101,7 @@ function App() {
           <div>Zero nominations</div>
         }
         {
-          nomination.length > 4 ?
+          (nomination!==null && nomination.length > 4) ?
           <div>Nomination limit is 5, please remove nominations to add more...</div>
           :
           null
