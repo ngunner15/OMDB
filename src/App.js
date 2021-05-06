@@ -2,7 +2,7 @@ import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ls from 'local-storage';
-import { Divider, Grid, Segment } from 'semantic-ui-react';
+import { Input, Divider, Grid, Segment } from 'semantic-ui-react';
 import MovieList from './components/MovieList';
 
 function App() {
@@ -73,9 +73,10 @@ function App() {
   return (
     <div className="App">
       <h1>The Shoppies</h1>
-      <input
+      <Input
+        icon='search'
         type="text"
-        placeholder="Search..."
+        placeholder='Search...'
         value={movie}
         onChange={searchQuery}
       />
