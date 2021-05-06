@@ -2,7 +2,7 @@ import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ls from 'local-storage';
-import { Input, Divider, Grid, Segment } from 'semantic-ui-react';
+import { Input, Divider, Grid, Segment, Message } from 'semantic-ui-react';
 import MovieList from './components/MovieList';
 
 function App() {
@@ -120,7 +120,11 @@ function App() {
             }
             {
               (nomination !== null && nomination.length > 4) ?
-                <div>Nomination limit is 5, please remove nominations to add more...</div>
+                <Message
+                  warning
+                  header='Nomination limit is 5!'
+                  content='please remove nominations to add more...'
+                />
                 :
                 null
             }
