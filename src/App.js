@@ -2,6 +2,8 @@ import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ls from 'local-storage';
+import { Divider, Grid, Segment } from 'semantic-ui-react';
+import MovieList from './components/MovieList';
 
 function App() {
 
@@ -11,7 +13,7 @@ function App() {
 
   useEffect(() => {
     axios.get(`http://www.omdbapi.com/?s=${movie}&apikey=${process.env.REACT_APP_API_KEY}`)
-      .then(function(response) {
+      .then(function (response) {
         // handle success
         // const results = response.data.Search.filter(name =>
         //   name.toLowerCase().includes(movie.toLowerCase())
@@ -36,6 +38,12 @@ function App() {
   // }
 
   // fetchData();
+
+  // handle logic
+
+  const searchQuery = (e) => {
+    setMovie(e.target.value);
+  }
 
   // button logic
 
@@ -69,44 +77,56 @@ function App() {
         type="text"
         placeholder="Search..."
         value={movie}
-        onChange={(e) => {
-          setMovie(e.target.value);
-        }}
+        onChange={searchQuery}
       />
-      {/* <div>{searchResults}</div> */}
-      <ul>
-         {
-          searchResults ?
-          searchResults.map(item => (
-            <div>
-              <li>{item.Title} {item.Year}</li>
-              <button disabled={disableButton(item)} onClick={() => addToNominations(item)}>Nominate</button>
-            </div>
-          ))
-          :
-          <div>No Data</div>
-        }
-      </ul>
-      <br></br>
-      <ul>
-         {
-          nomination ?
-          nomination.map((item, index) => (
-            <div>
-              <li>{item.Title} {item.Year}</li>
-              <button onClick={() => removeNominations(index)}>Remove</button>
-            </div>
-          ))
-          :
-          <div>Zero nominations</div>
-        }
-        {
-          (nomination!==null && nomination.length > 4) ?
-          <div>Nomination limit is 5, please remove nominations to add more...</div>
-          :
-          null
-        }
-      </ul>
+      <Segment>
+        <Grid columns={2} relaxed='very'>
+          <Grid.Column>
+            {
+              searchResults ?
+                searchResults.map((item, index) => {
+                  return (
+                    <MovieList
+                      key={index}
+                      index={index}
+                      item={item}
+                      disableButton={disableButton}
+                      addToNominations={addToNominations}
+                    />
+                  )
+                })
+                :
+                <div>No Data</div>
+            }
+          </Grid.Column>
+
+          <Grid.Column>
+            {
+              nomination ?
+                nomination.map((item, index) => {
+                  return (
+                    <MovieList
+                      key={index}
+                      index={index}
+                      item={item}
+                      disableButton={disableButton}
+                      removeNominations={removeNominations}
+                    />
+                  )
+                })
+                :
+                <div>Zero nominations</div>
+            }
+            {
+              (nomination !== null && nomination.length > 4) ?
+                <div>Nomination limit is 5, please remove nominations to add more...</div>
+                :
+                null
+            }
+          </Grid.Column>
+        </Grid>
+        <Divider vertical>&#10033;</Divider>
+      </Segment>
     </div>
   );
 }
