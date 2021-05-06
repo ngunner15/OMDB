@@ -1,14 +1,16 @@
 import React from "react";
+import { Button } from 'semantic-ui-react';
 
 export default function MovieList({ item, index, disableButton, addToNominations, removeNominations }) {
   return (
     <div>
       <p>{item.Title} ({item.Year})</p>
+      {/* logic for which button to show */}
       {
         addToNominations ?
-          <button disabled={disableButton(item)} onClick={() => addToNominations(item)}>Nominate</button>
+          <Button inverted color='blue' disabled={disableButton(item)} onClick={() => addToNominations(item)}>Nominate</Button>
           :
-          <button onClick={() => removeNominations(index)}>Remove</button>
+          <Button inverted color='red' onClick={() => removeNominations(index)}>Remove</Button>
       }
     </div>
   );
