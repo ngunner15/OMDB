@@ -45,11 +45,23 @@ function App() {
   // button logic
 
   const addToNominations = (item) => {
-    let nominationArray = [...nomination, item];
+    if (!nomination || nomination.length === 0) {
+      setNomination([item])
 
-    setNomination(nominationArray);
-    // adding to localStorage
-    ls.set('nominations', nominationArray);
+      // adding to localStorage
+      ls.set('nominations', [item]);
+    } else {
+      let nominationArray = [...nomination, item]
+      setNomination([...nomination, item])
+
+      // adding to localStorage
+      ls.set('nominations', nominationArray);
+    }
+    // let nominationArray = [...nomination, item];
+
+    // setNomination(nominationArray);
+    // // adding to localStorage
+    // ls.set('nominations', nominationArray);
   }
 
   const removeNominations = (index) => {
