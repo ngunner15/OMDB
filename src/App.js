@@ -20,7 +20,7 @@ function App() {
   const [nomination, setNomination] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://www.omdbapi.com/?s=${movie}&apikey=3327f646`)
+    axios.get(`https://www.omdbapi.com/?s=${movie}&apikey=${process.env.REACT_APP_API_KEY}`)
       .then(function (response) {
         // console.log(response.data.Search);
         setSearchResults(response.data.Search);
