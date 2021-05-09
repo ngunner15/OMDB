@@ -4,7 +4,7 @@ import { Message } from 'semantic-ui-react';
 
 export default function Nomination({ nomination, disableButton, removeNominations }) {
   return (
-    <div>
+    <div className="App">
       <h1>The Shoppies</h1>
       {
         nomination ?
@@ -25,6 +25,7 @@ export default function Nomination({ nomination, disableButton, removeNomination
       {
         (nomination !== null && nomination.length > 4) ?
           <Message
+            size='large'
             warning
             header='Nomination limit is 5!'
             content='please remove nominations to add more...'
