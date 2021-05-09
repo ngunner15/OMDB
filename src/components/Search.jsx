@@ -1,10 +1,11 @@
 import React from "react";
 import MovieList from './MovieList';
-import { Input } from 'semantic-ui-react';
+import { Message, Input } from 'semantic-ui-react';
 
-export default function Search({ disableButton, addToNominations, movie, searchQuery, searchResults }) {
+export default function Search({ disableButton, addToNominations, movie, searchQuery, searchResults, nomination }) {
+
   return (
-    <div>
+    <div className="App">
       <h1>The Shoppies</h1>
       <Input
         icon='search'
@@ -27,7 +28,22 @@ export default function Search({ disableButton, addToNominations, movie, searchQ
             )
           })
           :
-          <div>No Data</div>
+          <Message
+            size='large'
+            info
+            header='Type a movie name in the Search bar!'
+          />
+      }
+      {
+        (nomination !== null && nomination.length > 4) ?
+          <Message
+            size='large'
+            warning
+            header='Nomination limit is 5!'
+            content='please remove nominations to add more...'
+          />
+          :
+          null
       }
     </div>
   );
