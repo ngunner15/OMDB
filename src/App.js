@@ -2,8 +2,14 @@ import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ls from 'local-storage';
-import { Input, Divider, Grid, Segment, Message } from 'semantic-ui-react';
-import MovieList from './components/MovieList';
+import Search from './components/Search';
+import Nomination from './components/Nomination';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
 
@@ -72,66 +78,31 @@ function App() {
 
   return (
     <div className="App">
-      <h1>The Shoppies</h1>
-      <Input
-        icon='search'
-        type="text"
-        placeholder='Search...'
-        value={movie}
-        onChange={searchQuery}
-      />
-      <Segment>
-        <Grid columns={2} relaxed='very'>
-          <Grid.Column>
-            {
-              searchResults ?
-                searchResults.map((item, index) => {
-                  return (
-                    <MovieList
-                      key={index}
-                      index={index}
-                      item={item}
-                      disableButton={disableButton}
-                      addToNominations={addToNominations}
-                    />
-                  )
-                })
-                :
-                <div>No Data</div>
-            }
-          </Grid.Column>
+      <Router>
+        <div>
+          <nav>
+            <ul>
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/nomination">Nomination</Link>
+              </li>
+            </ul>
+          </nav>
 
-          <Grid.Column>
-            {
-              nomination ?
-                nomination.map((item, index) => {
-                  return (
-                    <MovieList
-                      key={index}
-                      index={index}
-                      item={item}
-                      disableButton={disableButton}
-                      removeNominations={removeNominations}
-                    />
-                  )
-                })
-                :
-                <div>Zero nominations</div>
-            }
-            {
-              (nomination !== null && nomination.length > 4) ?
-                <Message
-                  warning
-                  header='Nomination limit is 5!'
-                  content='please remove nominations to add more...'
-                />
-                :
-                null
-            }
-          </Grid.Column>
-        </Grid>
-        <Divider vertical>&#10033;</Divider>
-      </Segment>
+          {/* A <Switch> looks through its children <Route>s and
+            renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/nomination">
+              <Nomination nomination={nomination} disableButton={disableButton} removeNominations={removeNominations} />
+            </Route>
+            <Route path="/">
+              <Search movie={movie} searchQuery={searchQuery} searchResults={searchResults} disableButton={disableButton} addToNominations={addToNominations} />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
