@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Input, Menu } from 'semantic-ui-react';
-import { NavLink, withRouter } from 'react-router-dom';
+import { Menu } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
 import '../App.css';
 
 export default class MenuExampleEvenlyDivided extends Component {
