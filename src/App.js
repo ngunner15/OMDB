@@ -1,16 +1,17 @@
-import './App.css';
-import axios from 'axios';
 import { useState, useEffect } from 'react';
-import ls from 'local-storage';
-import NavBar from './components/NavBar';
-import Search from './components/Search';
-import Nomination from './components/Nomination';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+
+import axios from 'axios';
+import ls from 'local-storage';
+
+import NavBar from './components/NavBar';
+import Search from './components/Search';
+import Nomination from './components/Nomination';
+import './App.css';
 
 function App() {
 
@@ -21,11 +22,7 @@ function App() {
   useEffect(() => {
     axios.get(`http://www.omdbapi.com/?s=${movie}&apikey=${process.env.REACT_APP_API_KEY}`)
       .then(function (response) {
-        // handle success
-        // const results = response.data.Search.filter(name =>
-        //   name.toLowerCase().includes(movie.toLowerCase())
-        // )
-        console.log(response.data.Search);
+        // console.log(response.data.Search);
         setSearchResults(response.data.Search);
       })
       .catch(function (error) {
@@ -38,13 +35,6 @@ function App() {
     let myNominations = ls.get('nominations');
     setNomination(myNominations);
   }, []);
-
-  // const fetchData = async () => {
-  //   let req = await axios.get(`http://www.omdbapi.com/?s=batman&apikey=${process.env.REACT_APP_API_KEY}`);
-  //   console.log(req.data.Search);
-  // }
-
-  // fetchData();
 
   // handle logic
 
@@ -83,14 +73,12 @@ function App() {
         <div>
           <NavBar />
 
-          {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
           <Switch>
             <Route path="/nomination">
               <Nomination nomination={nomination} disableButton={disableButton} removeNominations={removeNominations} />
             </Route>
             <Route path="/">
-              <Search movie={movie} searchQuery={searchQuery} searchResults={searchResults} disableButton={disableButton} addToNominations={addToNominations} />
+              <Search movie={movie} searchQuery={searchQuery} searchResults={searchResults} disableButton={disableButton} addToNominations={addToNominations} nomination={nomination} />
             </Route>
           </Switch>
         </div>
