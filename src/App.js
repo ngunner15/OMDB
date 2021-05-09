@@ -2,6 +2,7 @@ import './App.css';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import ls from 'local-storage';
+import NavBar from './components/NavBar';
 import Search from './components/Search';
 import Nomination from './components/Nomination';
 import {
@@ -80,16 +81,7 @@ function App() {
     <div className="App">
       <Router>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/nomination">Nomination</Link>
-              </li>
-            </ul>
-          </nav>
+          <NavBar />
 
           {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
