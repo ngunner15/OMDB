@@ -1,14 +1,33 @@
 # OMDB
-OMDB allows the user to save their favourite films they feel should be up for nomination.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+OMDB allows the user to save their favourite films they feel should be up for nomination.
+This project was created as a part of Shopify's UX Developer Intern & Web Developer Intern Challenge - Fall 2021.
+
+## Project Details
+
+[Click here](https://docs.google.com/document/d/1SdR9rQpocsH5rPTOcxr9noqHRld5NJlylKO9Hf94U8U/edit#heading=h.31w9woubunro)
 
 ## Demo
 
-https://zealous-euclid-9efafe.netlify.app/
+This website is hosted on Netlify.
+[Click here](https://zealous-euclid-9efafe.netlify.app/)
+
+## Dependencies
+
+- react
+- react-dom
+- react-router-dom
+- react-scripts
+- axios
+- local-storage
+- semantic-ui-css
+- semantic-ui-react
+- web-vitals
+
 
 ## Available Scripts
 
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 In the project directory, you can run:
 
 ### `npm start`
