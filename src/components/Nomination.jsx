@@ -20,7 +20,12 @@ export default function Nomination({ nomination, disableButton, removeNomination
             )
           })
           :
-          <div>Zero nominations</div>
+          <Message
+            size='large'
+            info
+            header='Zero Nomination'
+            content='please add movie nominations...'
+          />
       }
       {
         (nomination !== null && nomination.length > 4) ?
