@@ -4,16 +4,12 @@ import { NavLink } from 'react-router-dom';
 import '../App.css';
 
 export default function NavBar() {
+
   const [activeItem, setActiveItem] = useState('');
 
-  const reset = () => {
-    setActiveItem("");
-  }
-
+  // handle to change active status
   const handleItemClick = (e) => {
     setActiveItem(e.target.name);
-
-    reset();
   } 
 
     return (
