@@ -1,31 +1,39 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { Menu } from 'semantic-ui-react';
 import { NavLink } from 'react-router-dom';
 import '../App.css';
 
-export default class MenuExampleEvenlyDivided extends Component {
-  state = {}
+export default function NavBar() {
+  const [activeItem, setActiveItem] = useState('');
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+  const reset = () => {
+    setActiveItem("");
+  }
 
-  render() {
-    const { activeItem } = this.state
+  const handleItemClick = (e) => {
+    setActiveItem(e.target.name);
+
+    reset();
+  } 
 
     return (
-      <Menu inverted pointing fluid widths={2}>
+      <Menu inverted fluid widths={2}>
         <Menu.Item
           as={NavLink} to="/"
+          exact
           name='search'
+          icon='home'
           active={activeItem === 'search'}
-          onClick={this.handleItemClick}
+          onClick={handleItemClick}
         />
         <Menu.Item
           as={NavLink} to="/nomination"
+          exact
           name='nomination'
+          icon='heart'
           active={activeItem === 'nomination'}
-          onClick={this.handleItemClick}
+          onClick={handleItemClick}
         />
       </Menu>
     )
-  }
 }
