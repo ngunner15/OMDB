@@ -57,11 +57,6 @@ function App() {
       // adding to localStorage
       ls.set('nominations', nominationArray);
     }
-    // let nominationArray = [...nomination, item];
-
-    // setNomination(nominationArray);
-    // // adding to localStorage
-    // ls.set('nominations', nominationArray);
   }
 
   const removeNominations = (index) => {
